@@ -1,0 +1,24 @@
+<mat-toolbar class="header">Chat</mat-toolbar>
+
+<mat-sidenav-container class="container">
+  <mat-sidenav
+          position="end"
+          mode="side"
+          opened
+          class="sidenav">End</mat-sidenav>
+  <section>
+    <app-chat></app-chat>
+  </section>
+  <mat-toolbar class="footer">
+    <form class="form">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Message" value="">
+      </mat-form-field>
+    </form>
+    <button mat-button>Send</button>
+  </mat-toolbar>
+
+</mat-sidenav-container>
+
+<router-outlet></router-outlet>
+
