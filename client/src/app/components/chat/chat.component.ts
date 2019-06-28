@@ -5,7 +5,7 @@ import {Action} from "../../models/action";
 import { Event } from '../../models/event';
 import { Message } from '../../models/message';
 import { User } from '../../models/user';
-// import { SocketService } from './shared/services/socket.service';
+import {SocketService} from "./services/socket.service";
 // import { DialogUserComponent } from './dialog-user/dialog-user.component';
 // import { DialogUserType } from './dialog-user/dialog-user-type';
 
@@ -33,13 +33,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
   };
 
   // getting a reference to the overall list, which is the parent container of the list items
-  // @ViewChild(MatList, { read: ElementRef }) matList: ElementRef;
+  @ViewChild(MatList, { read: ElementRef }) matList: ElementRef;
 
   // getting a reference to the items/messages within the list
   @ViewChildren(MatListItem, { read: ElementRef }) matListItems: QueryList<MatListItem>;
 
   constructor(
-    // private socketService: SocketService,
+    private socketService: SocketService,
     //           public dialog: MatDialog
   ) { }
 
