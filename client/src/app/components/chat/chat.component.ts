@@ -19,18 +19,18 @@ const AVATAR_URL = 'https://api.adorable.io/avatars/285';
 })
 export class ChatComponent implements OnInit, AfterViewInit {
   public action = Action;
-  // user: User;
-  // messages: Message[] = [];
-  // messageContent: string;
-  // ioConnection: any;
-  // dialogRef: MatDialogRef<DialogUserComponent> | null;
-  // defaultDialogUserParams: any = {
-  //   disableClose: true,
-  //   data: {
-  //     title: 'Welcome',
-  //     dialogType: DialogUserType.NEW
-  //   }
-  // };
+  public user: User;
+  public messages: Message[] = [];
+  public messageContent: string;
+  public ioConnection: any;
+  public dialogRef: MatDialogRef<DialogUserComponent> | null;
+  public defaultDialogUserParams: any = {
+    disableClose: true,
+    data: {
+      title: 'Welcome',
+      dialogType: DialogUserType.NEW
+    }
+  };
 
   // getting a reference to the overall list, which is the parent container of the list items
   // @ViewChild(MatList, { read: ElementRef }) matList: ElementRef;
