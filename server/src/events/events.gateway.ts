@@ -3,21 +3,49 @@ import {
     WebSocketGateway,
     WebSocketServer,
     WsResponse,
+    OnGatewayConnection,
+    OnGatewayDisconnect,
 } from '@nestjs/websockets';
 import {Client, Server} from 'socket.io';
 
 @WebSocketGateway()
-export class EventsGateway {
+export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer()
     server: Server;
+    users = []
 
+    async handleConnection() {
+        console.log('handleConnection')
+        // Notify connected clients of current users
 
+    }
+
+    async handleDisconnect(client) {
+        console.log('handleConnection', client.conn.id)
+        // Notify connected clients of current users
+        const event = 'notification';
+
+        this.users = this.users.filter(function( obj ) {
+            return obj.id !== client.conn.id;
+        });
+
+        this.server.emit(event, this.users);
+
+    }
 
     @SubscribeMessage('message')
-    handleEvent(client: Client, data: any): any {
-        console.log(' message data', data);
+    handleMessage(client: Client, data: any): any {
+        console.log(' message data', client, data);
         const event = 'message';
         this.server.emit(event, data);
+    }
+
+    @SubscribeMessage('notification')
+    handleNotification(client: Client, data: any): any {
+        console.log(' message data', client.conn.id, data);
+        const event = 'notification';
+        this.users.push({...data.from, id: client.conn.id})
+        this.server.emit(event, this.users);
     }
 
     @SubscribeMessage('disconnect')

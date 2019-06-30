@@ -20,6 +20,7 @@ const AVATAR_URL = 'https://api.adorable.io/avatars/285';
 export class ChatComponent implements OnInit, AfterViewInit {
   public action = Action;
   public user: User;
+  public users: User[] = [];
   public messages: Message[] = [];
   public messageContent: string;
   public ioConnection: any;
@@ -81,6 +82,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {
         this.messages.push(message);
+      });
+
+    this.ioConnection = this.socketService.onUser()
+      .subscribe((users: User[]) => {
+        this.users = users;
       });
 
 
@@ -156,8 +162,16 @@ console.log('sendMessage')
           previousUsername: params.previousUsername
         }
       };
+    } else if (action === Action.LEFT) {
+      console.log('left')
+      message = {
+        action: action,
+        content: {
+          username: this.user.name
+        }
+      };
     }
 console.log('sendNotification')
-    this.socketService.send(message);
+    this.socketService.sendNotification(message);
   }
 }
