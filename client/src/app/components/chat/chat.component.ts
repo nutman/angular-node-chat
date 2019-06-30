@@ -130,7 +130,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     if (!message) {
       return;
     }
-
+console.log('sendMessage')
     this.socketService.send({
       from: this.user,
       content: message
@@ -157,7 +157,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
         }
       };
     }
-
+console.log('sendNotification')
     this.socketService.send(message);
   }
 }

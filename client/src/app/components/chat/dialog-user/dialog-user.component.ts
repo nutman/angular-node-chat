@@ -18,6 +18,7 @@ export class DialogUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('init DialogUserComponent')
   }
 
   public onSave(): void {

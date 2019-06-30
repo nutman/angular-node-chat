@@ -12,16 +12,21 @@ export class SocketService {
   private socket;
 
   public initSocket(): void {
+    console.log(' init Socket')
     this.socket = socketIo(SERVER_URL);
   }
 
   public send(message: Message): void {
+    console.log('send')
     this.socket.emit('message', message);
   }
 
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
-      this.socket.on('message', (data: Message) => observer.next(data));
+      this.socket.on('message', (data: Message) => {
+        console.log('onMessage ', data)
+        return observer.next(data)
+      });
     });
   }
 
