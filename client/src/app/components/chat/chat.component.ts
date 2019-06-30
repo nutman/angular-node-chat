@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef } from '@angular/core';
-import { MatDialog, MatDialogRef, MatList, MatListItem } from '@angular/material';
+import {Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef} from '@angular/core';
+import {MatDialog, MatDialogRef, MatList, MatListItem} from '@angular/material';
 
 import {Action} from "../../models/action";
-import { Event } from '../../models/event';
-import { Message } from '../../models/message';
-import { User } from '../../models/user';
+import {Event} from '../../models/event';
+import {Message} from '../../models/message';
+import {User} from '../../models/user';
 import {SocketService} from "./services/socket.service";
 import {DialogUserComponent} from "./dialog-user/dialog-user.component";
 import {DialogUserType} from "./dialog-user/dialog-user-type";
@@ -34,15 +34,16 @@ export class ChatComponent implements OnInit, AfterViewInit {
   };
 
   // getting a reference to the overall list, which is the parent container of the list items
-  @ViewChild(MatList, {static: false, read: ElementRef }) matList: ElementRef;
+  @ViewChild(MatList, {static: false, read: ElementRef}) matList: ElementRef;
 
   // getting a reference to the items/messages within the list
-  @ViewChildren(MatListItem, { read: ElementRef }) matListItems: QueryList<MatListItem>;
+  @ViewChildren(MatListItem, {read: ElementRef}) matListItems: QueryList<MatListItem>;
 
   constructor(
     private socketService: SocketService,
-              public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog
+  ) {
+  }
 
   ngOnInit(): void {
     this.initModel();
@@ -136,7 +137,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
     if (!message) {
       return;
     }
-console.log('sendMessage')
     this.socketService.send({
       from: this.user,
       content: message
@@ -171,7 +171,11 @@ console.log('sendMessage')
         }
       };
     }
-console.log('sendNotification')
     this.socketService.sendNotification(message);
+  }
+
+  public addUserName(name: string) {
+    console.log(`@${name}`);
+    this.messageContent = `${this.messageContent ? this.messageContent: ''} <b>@${name}</b>`;
   }
 }
