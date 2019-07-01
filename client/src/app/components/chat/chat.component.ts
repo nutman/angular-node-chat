@@ -137,9 +137,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
     if (!message) {
       return;
     }
+    const date = new Date();
     this.socketService.send({
       from: this.user,
-      content: message
+      content: message,
+      date: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
     });
     this.messageContent = null;
   }
@@ -163,7 +165,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
         }
       };
     } else if (action === Action.LEFT) {
-      console.log('left')
       message = {
         action: action,
         content: {
@@ -175,7 +176,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   public addUserName(name: string) {
-    console.log(`@${name}`);
     this.messageContent = `${this.messageContent ? this.messageContent: ''} <b>@${name}</b>`;
   }
 }

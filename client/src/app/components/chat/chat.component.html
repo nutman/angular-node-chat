@@ -1,54 +1,55 @@
-<button mat-fab (click)="onClickUserInfo()">
-    <mat-icon>person</mat-icon>
-</button>
-<div class="chat-container">
-    <mat-card class="main-card">
-        <mat-list class="chat-list">
-            <mat-list-item *ngFor="let message of messages"
-                           [ngClass]="[(message.action === undefined && message.from.id === user.id)? 'chat-list-item': '']">
-                <img mat-list-avatar *ngIf="message.action === undefined" [src]="message.from.avatar">
-                <h4 mat-line *ngIf="message.action === undefined">
-                    <b>{{message.from.name}}</b>
-                </h4>
-                <p mat-line *ngIf="message.action === undefined">
-                    <span [innerHTML]="message.content"></span>
-                </p>
-                <p mat-line *ngIf="message.action === action.JOINED" class="chat-notification">
-                    <span> <b>{{message.from.name}}</b> joined to the conversation. </span>
-                </p>
-                <p mat-line *ngIf="message.action === action.LEFT" class="chat-notification">
-                    <span> <b>{{message.from.name}}</b> left the conversation. </span>
-                </p>
-                <p mat-line *ngIf="message.action === action.RENAME" class="chat-notification">
-                    <span> <b>{{message.content.previousUsername}}</b> is now <b>{{message.content.username}}</b> </span>
-                </p>
-            </mat-list-item>
-        </mat-list>
-        <div class="chat-footer-container">
-            <mat-icon>message</mat-icon>
-            <mat-form-field class="chat-input">
-                <input matInput
-                       #inputMessage
-                       maxlength="140"
-                       placeholder="Type your message"
-                       [(ngModel)]="messageContent"
-                       (keyup.enter)="sendMessage(messageContent)"
-                       [innerHTML]="messageContent">
-                <mat-hint align="end">{{inputMessage.value.length}}/140</mat-hint>
-            </mat-form-field>
+<mat-sidenav-container class="container">
+    <section class="section-wrapper">
+        <button mat-raised-button
+                class="edit-button"
+                color="primary" (click)="onClickUserInfo()">
+            <mat-icon>person</mat-icon>
+            Change name
+        </button>
+        <div class="chat-container all-wrap">
+            <div class="main-card page-wrap">
+                <mat-list class="chat-list-wrapper content">
+                    <mat-list-item *ngFor="let message of messages"
+                                   [ngClass]="[(message.action === undefined && message.from.id === user.id)? 'chat-list-item': '']">
+                        <img mat-list-avatar *ngIf="message.action === undefined" [src]="message.from.avatar">
+                        <p mat-line *ngIf="message.action === undefined">
+                            <span>({{message.date}})</span>&nbsp;
+                            <span class="user-name"><b>{{message.from.name}}:&nbsp;</b></span>
+                            <span [innerHTML]="message.content"></span>
+                        </p>
+                        <p mat-line *ngIf="message.action === action.JOINED" class="chat-notification">
+                            <span> <b>{{message.from.name}}</b> joined to the conversation. </span>
+                        </p>
+                        <p mat-line *ngIf="message.action === action.LEFT" class="chat-notification">
+                            <span> <b>{{message.from.name}}</b> left the conversation. </span>
+                        </p>
+                        <p mat-line *ngIf="message.action === action.RENAME" class="chat-notification">
+                            <span> <b>{{message.content.previousUsername}}</b> is now <b>{{message.content.username}}</b> </span>
+                        </p>
+                    </mat-list-item>
+                </mat-list>
+                <mat-toolbar class="chat-footer-container chat-list-wrapper" layout="row">
+                    <!--            <form class="form">-->
+                    <mat-icon>message</mat-icon>
+                    <mat-form-field class="full-width">
+                        <input matInput
+                               class="chat-input"
+                               [(ngModel)]="messageContent"
+                               (keyup.enter)="sendMessage(messageContent)"
+                               [innerHTML]="messageContent"
+                               placeholder="Message" value="">
+                    </mat-form-field>
+                    <button mat-button class="send-button" (click)="sendMessage(messageContent)">Send</button>
+                </mat-toolbar>
+            </div>
         </div>
-    </mat-card>
-</div>
-<mat-sidenav
-        position="end"
-        mode="side"
-        opened
-        class="sidenav">
-    <h3>Users</h3>
-    <mat-list class="chat-list">
-        <mat-list-item *ngFor="let user of users" (dblclick)="addUserName(user.name)">
-            <img mat-list-avatar [src]="user.avatar">
 
-            {{user.name}}</mat-list-item>
-    </mat-list>
-</mat-sidenav>
+    </section>
+    <mat-sidenav
+            position="end"
+            mode="side"
+            opened
+            class="sidenav">
+        <app-users [users]="users" (addUserName)="addUserName($event)"></app-users>
+    </mat-sidenav>
+</mat-sidenav-container>

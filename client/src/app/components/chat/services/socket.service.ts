@@ -13,29 +13,24 @@ export class SocketService {
   private socket;
 
   public initSocket(): void {
-    console.log(' init Socket')
     this.socket = socketIo(SERVER_URL);
     this.socket.on('disconnect', (data: Message) => {
-      console.log('onMessage ', data)
       this.socket.emit('disconnect', {});
     });
 
   }
 
   public send(message: Message): void {
-    console.log('send')
     this.socket.emit('message', message);
   }
 
   public sendNotification(message: Message): void {
-    console.log('send')
     this.socket.emit('notification', message);
   }
 
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
       this.socket.on('message', (data: Message) => {
-        console.log('onMessage ', data)
         return observer.next(data)
       });
     });
@@ -44,7 +39,6 @@ export class SocketService {
   public onUser(): Observable<User[]> {
     return new Observable<User[]>(observer => {
       this.socket.on('notification', (data: User[]) => {
-        console.log('onMessage ', data)
         return observer.next(data)
       });
     });

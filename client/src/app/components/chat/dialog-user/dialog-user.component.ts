@@ -7,7 +7,7 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './dialog-user.component.html',
   styleUrls: ['./dialog-user.component.scss']
 })
-export class DialogUserComponent implements OnInit {
+export class DialogUserComponent {
 
   public usernameFormControl = new FormControl('', [Validators.required]);
   public previousUsername: string;
@@ -17,12 +17,9 @@ export class DialogUserComponent implements OnInit {
     this.previousUsername = params.username ? params.username : undefined;
   }
 
-  ngOnInit() {
-    console.log('init DialogUserComponent')
-  }
-
   public onSave(): void {
     this.dialogRef.close({
+      id: this.params.id,
       username: this.params.username,
       dialogType: this.params.dialogType,
       previousUsername: this.previousUsername

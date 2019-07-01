@@ -1,0 +1,9 @@
+
+    <mat-list class="chat-list">
+        <mat-list-item *ngFor="let user of users"
+                       (dblclick)="addUserNameToInput(user.name)"
+                       class="user-item">
+            <img mat-list-avatar [src]="user.avatar">
+
+            {{user.name}}</mat-list-item>
+    </mat-list>

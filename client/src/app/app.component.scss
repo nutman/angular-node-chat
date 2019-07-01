@@ -1,25 +1,13 @@
 
-.container {
-  position: absolute;
-  top: 60px;
-  bottom: 60px;
-  left: 0;
-  right: 0;
-}
-
-.sidenav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  background: rgba(90, 90, 90, 0.96);
-}
 
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  background: #303030;
+  color: #909090;
+  border-bottom: 2px solid #000000;
 }
 
 .footer {
@@ -35,6 +23,4 @@
   width: 100%;
 }
 
-.full-width {
-  width: 100%;
-}
+
