@@ -1,0 +1,29 @@
+.user-name {
+  color: #0000ff;
+}
+
+mat-list-item:nth-child(even) {
+  background: #CCC
+}
+
+.chat-list-wrapper {
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.container {
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.section-wrapper {
+  height: 100%;
+}
+
+.full-width {
+  width: 100%;
+}

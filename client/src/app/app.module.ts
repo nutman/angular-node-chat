@@ -10,13 +10,15 @@ import { SharedModule } from './shared/shared.module';
 import { DialogUserComponent } from './components/chat/dialog-user/dialog-user.component';
 import {SocketService} from "./components/chat/services/socket.service";
 import { UsersComponent } from './components/chat/users/users.component';
+import { ChatMessagesComponent } from './components/chat/chat-messages/chat-messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
     DialogUserComponent,
-    UsersComponent
+    UsersComponent,
+    ChatMessagesComponent
   ],
   imports: [
     BrowserModule,
