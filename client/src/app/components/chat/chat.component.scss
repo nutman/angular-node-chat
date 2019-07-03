@@ -60,3 +60,26 @@ mat-list-item:nth-child(even) {
 .edit-button {
   margin: 5px;
 }
+
+.mat-form-field-label-wrapper {
+}
+
+.chat-footer-container {
+  width: auto;
+}
+
+::ng-deep .chat-footer-container .mat-form-field {
+  .mat-form-field-label {
+    color: slategray;
+  }
+}
+
+
+
+::ng-deep .chat-footer-container .mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: slategray;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+}
